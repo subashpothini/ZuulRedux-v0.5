@@ -6,6 +6,8 @@
 package zuulredux.zuul_model;
 
 
+import zuul_model.tasks.Task;
+
 /**
  *
  * @author Sam
@@ -13,22 +15,21 @@ package zuulredux.zuul_model;
 public class Command_ {
 
     protected final Actionable subject, iObject, dObject;
-    protected final zuul_model.Task verb;
+    protected final Task verb;
     protected final Object[] list;
 
-    public Command_(Task verb, Actionable subject, Actionable dObject, Actionable iObject) {
-        list = new Object[4];
-        list[0] = this.verb = verb;
-        list[1] = this.subject = subject;
-        list[2] = this.dObject = dObject;
-        list[3] = this.iObject = iObject;
+    public Command_(Task verb, zuulredux.zuul_model.Actionable subject, zuulredux.zuul_model.Actionable dObject, zuulredux.zuul_model.Actionable iObject) {
+        list = new Actionable[3];
+        list[0] = this.subject = subject;
+        list[1] = this.dObject = dObject;
+        list[2] = this.iObject = iObject;
     }
 
     public Task getVerb() {
         return verb;
     }
 
-    public Actionable getSub() {
+    public Actionable getSubject() {
         return subject;
     }
 
