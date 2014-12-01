@@ -21,7 +21,7 @@ public class Go implements Task{
     public Go (zuul_model.Actionable subject,
                     zuul_model.Actionable dObject,
                     zuul_model.Actionable iObject) {
-        this.subject = subject;
+        this.subject = (Player) subject;
         this.dObject = dObject;
         this.iObject = iObject;
     }
@@ -33,7 +33,7 @@ public class Go implements Task{
      */
     public boolean performAction() {
         //Test that the input values are appropriate.
-        if ((subject.className() != Player.className()) || (dObject.getName() != Room.getName())) {
+        if ((subject.getClass().className() != Player.className()) || (dObject.getName() != Room.getName())) {
             return false;
         }
 

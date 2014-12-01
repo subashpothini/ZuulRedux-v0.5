@@ -1,5 +1,6 @@
 package zuul_model.tasks;
 
+import zuul_model.Actionable;
 import zuul_model.Item;
 
 /**
@@ -54,7 +55,7 @@ public class Give {
     }
 
     private boolean implementsContainer(Actionable test) {
-        Class[] interface_list = test.getInterfaces();
+        Class[] interface_list = test.class().getInterfaces();
         String container_name = Container.getName();
         for(Class interface_item : interface_list) {
             if (interface_item.getName() == container_name) {

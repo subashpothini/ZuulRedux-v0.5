@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zuulredux.zuul_model;
+package zuul_model;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -15,12 +14,13 @@ import java.util.Map;
  */
 public abstract class Actionable {
     
-    private final String name;
+    private final String name, description;
     private Map<String, zuul_model.Command> commandMap;
     
-    public Actionable(String name)
+    public Actionable(String name, String description)
     {
         this.name = name;
+        this.description = description;
         commandMap = new HashMap<String, zuul_model.Command>();
     }
     
@@ -28,9 +28,9 @@ public abstract class Actionable {
     {
         return name;
     }
-    
-    public int validCommand(zuul_model.Command testCommand)
+
+    public String examine()
     {
-        
+        return description;
     }
 }

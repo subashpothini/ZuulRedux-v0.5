@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class Mobile {
     private Room currentRoom;
-    private HashMap<String, Item> items = new HashMap<String, Item>();
+    private Map<String, Item> items = new HashMap<String, Item>();
     
     public Mobile(Room room)
     {

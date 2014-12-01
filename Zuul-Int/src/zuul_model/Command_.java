@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package zuulredux.zuul_model;
+package zuul_model;
 
 
 import zuul_model.tasks.Task;
