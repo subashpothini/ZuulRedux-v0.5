@@ -5,7 +5,7 @@ import java.util.*;
  *
  * @author jdb
  */
-public class Mobile implements Actionable, Container{
+public class Mobile extends Container implements Actionable{
 
     private final String description;
     private Room currentRoom;
@@ -24,29 +24,6 @@ public class Mobile implements Actionable, Container{
 
 
 
-    @Override
-    public boolean has(Item item) {
-        if(items.containsValue(item)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    @Override
-    public boolean give(Item item) {
-        items.put(item.getName(), item);
-        return true;
-    }
-
-    @Override
-    public boolean take(Item item) {
-        if(items.remove(item.getName()) != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 
     /**
      * mutator for room

@@ -40,9 +40,9 @@ public class Stove extends Item {
     {
         String s;
         if (addName)
-            s = getName() + ": " + getDescription();
+            s = getName() + ": " + this.examine();
         else
-            s = getDescription();
+            s = this.examine();
         if (burning)
             s += " (HOT)";
         else

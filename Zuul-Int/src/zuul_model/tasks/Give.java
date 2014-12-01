@@ -12,7 +12,8 @@ public class Give implements Task{
     private zuul_model.Actionable subject;
     private zuul_model.Actionable dObject;
     private zuul_model.Actionable iObject;
-    private zuul_model.Item item;
+    private zuul_model.Item testItem;
+    private zuul_model.Container testContainer;
 
     /*
     go task: 'subject' is taken from 'indirect object' and given to 'direct object'
@@ -26,7 +27,8 @@ public class Give implements Task{
         this.subject = subject;
         this.dObject = dObject;
         this.iObject = iObject;
-        item = new Item("", "", 0);
+        testItem = new Item("", "", 0);
+        testContainer = new Container();
     }
 
     @Override
@@ -36,32 +38,25 @@ public class Give implements Task{
      */
     public boolean performAction() {
         //Test that the input values are appropriate.
-        if (subject.getClass().getName() != item.getClass().getName()) {
+        if (! subject.getClass().getName().equals(testItem.getClass().getName())) {
             return false;
         }
-        if (! this.implementsContainer(dObject)) {
+        Item subjectItem = (Item) subject;
+        String containerID = testContainer.getClass().getName();
+        if (! dObject.getClass().getName().equals(containerID)) {
             return false;
         }
-        if (! this.implementsContainer(iObject)) {
+        Container dObjectContainer = (Container) dObject;
+        if (! iObject.getClass().getName().equals(containerID)) {
             return false;
         }
+        Container iObjectContainer = (Container) iObject;
 
         //perform action
-        if(iObject.has((Container) subject)) {
-            dObject.give((Item) subject);
-            iObject.take((Item) subject);
+        if(iObjectContainer.has(subjectItem)) {
+            dObjectContainer.give(subjectItem);
+            iObjectContainer.take(subjectItem);
             return true;
-        }
-        return false;
-    }
-
-    private boolean implementsContainer(Actionable test) {
-        Class[] interface_list = test.getClass().getInterfaces();
-        String container_name = Container.getName();
-        for(Class interface_item : interface_list) {
-            if (interface_item.getName() == container_name) {
-                return true;
-            }
         }
         return false;
     }

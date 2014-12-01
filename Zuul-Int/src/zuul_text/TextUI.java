@@ -40,7 +40,7 @@ public class TextUI {
                 
         GameResult result = GameResult.CONTINUE;
         while (result == GameResult.CONTINUE) {
-            Command command = parser.getCommand();
+            Command__ command = parser.getCommand();
             
             System.out.println(command);
 

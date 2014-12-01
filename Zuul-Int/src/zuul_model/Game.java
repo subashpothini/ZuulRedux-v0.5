@@ -117,7 +117,7 @@ public class Game
      * @return either SUCCESS (game won), QUIT or CONTINUE
      * @throws zuul_model.ZuulException if the command can not me obeyed
      */
-    public GameResult move(Command command) throws ZuulException
+    public GameResult move(Command__ command) throws ZuulException
     {
         Stove stove;
         Room room = player.getRoom();

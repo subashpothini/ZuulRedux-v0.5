@@ -31,10 +31,19 @@ public class Player extends Mobile
         if (weight > maxWeight) {
             throw (new ZuulException("You can only carry " + maxWeight + " kilos."));
         }
-        addItem(getRoom().take(name));
+        this.give(getRoom().get(name));
+        this.getRoom().take(name);
     }
 
+    /*
+    !!!!implement
+    delivers message to the player
+    @param message the message top give to the player
+     */
+    public void inform(String message)
+    {
 
+    }
     
     /**
      * Player attempts to leave the item in the room
@@ -89,7 +98,7 @@ public class Player extends Mobile
      * Try to go to one direction. If there is an exit, enter the new
      * room, otherwise return the exception
      */
-    public void changeRoom(Command command) throws ZuulException
+    public void changeRoom(Command__ command) throws ZuulException
     {
         if(!command.hasSecondWord()) {
             throw new ZuulException("Go where?");

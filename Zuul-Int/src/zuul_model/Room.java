@@ -16,7 +16,7 @@ import java.util.*;
  * Modified by John Bovey
  */
 
-public class Room implements Actionable, Container
+public class Room extends Container implements Actionable
 {
     private final String description;
     private Map<String, Room> exits = new HashMap<String, Room>();        // stores exits of this room.
@@ -38,36 +38,8 @@ public class Room implements Actionable, Container
         return description;
     }
 
-    /**
-     * Add the item to the room
-     * @param item
-     */
-    public boolean give(Item item) {
-        items.put(item.getName(), item);
-        return true;
-    }
 
-    public boolean take(Item item)
-    {
-        if(items.remove(item.getName()) != null) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    
-    /**
-     * take the named item from the room.
-     * @param name of the item
-     * @return the item taken
-     * @throws zuul_model.ZuulException if named item is not in the room
-     */
-    public Item take(String name) throws ZuulException
-    {
-        if (items.containsKey(name))
-            return items.remove(name);
-        throw new ZuulException("There is no " + name + " in the room!");
-    }
+
     
     /**
      * Destroy the item if it exists, otherwise quietly do nothing.
@@ -90,21 +62,6 @@ public class Room implements Actionable, Container
         if (items.containsKey(name))
             return items.get(name);
         throw new ZuulException("There is no " + name + " in the room!");
-    }
-    
-    /**
-     * Test if the item is in the room
-     * @param name of item
-     * @return true if item is in room
-     */
-    public boolean has(String name)
-    {
-        return items.containsKey(name);
-    }
-
-    public boolean has(Item item)
-    {
-        return items.containsValue(item);
     }
 
     /*

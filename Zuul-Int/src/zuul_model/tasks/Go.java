@@ -11,6 +11,8 @@ public class Go implements Task{
     private zuul_model.Actionable subject;
     private zuul_model.Actionable dObject;
     private zuul_model.Actionable iObject;
+    private Player testPlayer;
+    private Room testRoom;
 
     /*
     go task: 'subject' goes to 'direct object'
@@ -24,6 +26,8 @@ public class Go implements Task{
         this.subject = (Player) subject;
         this.dObject = dObject;
         this.iObject = iObject;
+        testRoom = new Room("");
+        testPlayer = new Player("", testRoom);
     }
 
     @Override
@@ -33,12 +37,16 @@ public class Go implements Task{
      */
     public boolean performAction() {
         //Test that the input values are appropriate.
-        if ((subject.getClass().className() != Player.className()) || (dObject.getName() != Room.getName())) {
+        if ( ! subject.getClass().getName().equals(testPlayer.getClass().getName())) {
             return false;
         }
-
+        Player subjectPlayer = (Player) subject;
+        if( ! dObject.getClass().getName().equals(testRoom.getClass().getName())) {
+            return false;
+        }
+        Room dObjectRoom = (Room) dObject;
         //perform action
-        subject.changeRoom(dObject);
+        subjectPlayer.changeRoom(dObjectRoom);
         return true;
     }
 }
