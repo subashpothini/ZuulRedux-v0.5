@@ -31,7 +31,7 @@ public class Hen extends Mobile {
     {
         for (int i = 1; i <= eggs; i++)
             if (hasItem("egg" + i)) {
-                getRoom().putItem(getItem("egg" + i));
+                getRoom().give(getItem("egg" + i));
                 return;
             }
     }
@@ -43,7 +43,7 @@ public class Hen extends Mobile {
     {
         Room rooms[] = getRoom().adjoiningRooms().toArray(new Room[0]);
         if (rooms.length > 0) {
-            setRoom(rooms[rand.nextInt(rooms.length)]);
+            changeRoom(rooms[rand.nextInt(rooms.length)]);
             if (rand.nextInt(layFrequency) == 0)
                 lay();
         }

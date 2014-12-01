@@ -5,7 +5,7 @@ import java.util.*;
  *
  * @author jdb
  */
-public class Mobile implements Actionable{
+public class Mobile implements Actionable, Container{
 
     private final String description;
     private Room currentRoom;
@@ -22,11 +22,37 @@ public class Mobile implements Actionable{
         return description;
     }
 
+
+
+    @Override
+    public boolean has(Item item) {
+        if(items.containsValue(item)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean give(Item item) {
+        items.put(item.getName(), item);
+        return true;
+    }
+
+    @Override
+    public boolean take(Item item) {
+        if(items.remove(item.getName()) != null) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * mutator for room
      * @param room
      */
-    public void setRoom(Room room) {
+    public void changeRoom(Room room) {
         currentRoom = room;
     }
     
@@ -96,4 +122,6 @@ public class Mobile implements Actionable{
     {
         return items.keySet();
     }
+
+
 }

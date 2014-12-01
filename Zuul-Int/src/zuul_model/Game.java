@@ -44,7 +44,7 @@ public class Game
      */
     private void addItem(String room, Item item)
     {
-        rooms.get(room).putItem(item);
+        rooms.get(room).give(item);
     }
     
     /**
@@ -98,7 +98,7 @@ public class Game
      */
     private boolean hasItem(String name)
     {
-        return player.hasItem(name) || player.getRoom().hasItem(name);
+        return player.hasItem(name) || player.getRoom().has(name);
     }
     
     /**
@@ -138,7 +138,7 @@ public class Game
         }
         
         if (commandWord.equals("light")) {
-            if (!room.hasItem(command.getSecondWord())) {
+            if (!room.has(command.getSecondWord())) {
                 throw new ZuulException("There is no " + command.getSecondWord()
                         + " in this room!");
             }
@@ -151,7 +151,7 @@ public class Game
             if (!hasItem("matches")) {
                 throw new ZuulException("You have nothing to light it with!");
             }
-            if (!room.hasItem("fire-wood")) {
+            if (!room.has("fire-wood")) {
                 throw new ZuulException("A stove needs fuel!");
             }
             stove.light();
@@ -183,7 +183,7 @@ public class Game
             for (String ingredient: ingredients) {
                 useItem(ingredient);
             }
-            room.putItem(new Item("cake", "A delicious freshly baked cake", 0.0)); 
+            room.give(new Item("cake", "A delicious freshly baked cake", 0.0));
             return GameResult.CONTINUE;
         }
         if (commandWord.equals("eat")) {

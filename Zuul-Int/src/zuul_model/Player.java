@@ -4,7 +4,8 @@ package zuul_model;
  *
  * @author jdb
  */
-public class Player extends Mobile{
+public class Player extends Mobile
+{
 
     private static final double maxWeight = 15.0; // Max kilos that can be carried
     private static final int maxItems = 2; // Maximum number of items that can be carried
@@ -12,7 +13,6 @@ public class Player extends Mobile{
     public Player(String description, Room room) {
         super(description, room);
     }
-
 
 
     /**
@@ -23,14 +23,18 @@ public class Player extends Mobile{
      */
     public void takeItem(String name) throws ZuulException
     {
-        if (itemsCount() == maxItems)
-            throw(new ZuulException("You only have two hands."));
+        if (itemsCount() == maxItems) {
+            throw (new ZuulException("You only have two hands."));
+        }
         Item item = getRoom().getItem(name);
         double weight = item.getWeight() + itemsWeight();
-        if (weight > maxWeight)
+        if (weight > maxWeight) {
             throw (new ZuulException("You can only carry " + maxWeight + " kilos."));
-        addItem(getRoom().takeItem(name));
+        }
+        addItem(getRoom().take(name));
     }
+
+
     
     /**
      * Player attempts to leave the item in the room
@@ -40,8 +44,9 @@ public class Player extends Mobile{
      */
     public void dropItem(String name) throws ZuulException
     {
-        if (!haveItem(name))
+        if (!haveItem(name)) {
             throw new ZuulException("I don't have a " + name);
+        }
         
         // We need to check the weight since the dropped item may have
         // negative weight.
@@ -50,7 +55,7 @@ public class Player extends Mobile{
             addItem(item);
             throw (new ZuulException("You can only carry " + maxWeight + " kilos."));
         }
-        getRoom().putItem(item);
+        getRoom().give(item);
     }
     
     /**
@@ -70,11 +75,13 @@ public class Player extends Mobile{
      */
     public String getItemsDescription()
     {
-        if (itemsCount() == 0)
+        if (itemsCount() == 0) {
             return "You are not carrying anything";
+        }
         String returnString = "You are carrying:";
-        for (Item item: getItems())
+        for (Item item: getItems()) {
             returnString += "\n\t" + item.longDescription();
+        }
         return returnString;
     }
     
@@ -84,18 +91,20 @@ public class Player extends Mobile{
      */
     public void changeRoom(Command command) throws ZuulException
     {
-        if(!command.hasSecondWord())
+        if(!command.hasSecondWord()) {
             throw new ZuulException("Go where?");
+        }
 
         String direction = command.getSecondWord();
 
         // Try to leave current room.
         Room nextRoom = getRoom().getExit(direction);
 
-        if (nextRoom == null)
+        if (nextRoom == null) {
             throw new ZuulException("There is no door!");
+        }
         
-        setRoom(nextRoom);
+        changeRoom(nextRoom);
     }
 
 }
