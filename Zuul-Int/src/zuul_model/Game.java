@@ -16,7 +16,7 @@ public class Game
     public Game() 
     {
         createRooms();
-        player = new Player(rooms.get("hallway"));
+        player = new Player("this is a player of the game", rooms.get("hallway"));
         hen = new Hen(rooms.get("henhouse"), 3);
     }
 

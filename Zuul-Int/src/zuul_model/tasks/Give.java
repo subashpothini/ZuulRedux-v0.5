@@ -7,7 +7,7 @@ import zuul_model.Item;
 /**
  * Created by Sam on 01/12/2014.
  */
-public class Give {
+public class Give implements Task{
 
     private zuul_model.Actionable subject;
     private zuul_model.Actionable dObject;
@@ -36,7 +36,7 @@ public class Give {
      */
     public boolean performAction() {
         //Test that the input values are appropriate.
-        if (subject.className() != Item.getClass().getName()) {
+        if (subject.getClass().getName() != item.getClass().getName()) {
             return false;
         }
         if (! this.implementsContainer(dObject)) {
@@ -47,16 +47,16 @@ public class Give {
         }
 
         //perform action
-        if(iObject.has(subject)) {
-            dObject.give(subject);
-            iObject.take(subject);
-            return true
+        if(iObject.has((Container) subject)) {
+            dObject.give((Item) subject);
+            iObject.take((Item) subject);
+            return true;
         }
         return false;
     }
 
     private boolean implementsContainer(Actionable test) {
-        Class[] interface_list = test.class().getInterfaces();
+        Class[] interface_list = test.getClass().getInterfaces();
         String container_name = Container.getName();
         for(Class interface_item : interface_list) {
             if (interface_item.getName() == container_name) {

@@ -17,7 +17,7 @@ public class Hen extends Mobile {
      */
     public Hen(Room room, int eggs)
     {
-        super(room, );
+        super("a small brown Hen", room);
         rand = new Random();
         this.eggs = eggs;
         for (int i = 1; i <= eggs; i++)

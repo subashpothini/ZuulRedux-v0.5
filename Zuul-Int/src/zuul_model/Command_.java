@@ -18,7 +18,7 @@ public class Command_ {
     protected final Task verb;
     protected final Object[] list;
 
-    public Command_(Task verb, zuulredux.zuul_model.Actionable subject, zuulredux.zuul_model.Actionable dObject, zuulredux.zuul_model.Actionable iObject) {
+    public Command_(Task verb, zuul_model.Actionable subject, zuul_model.Actionable dObject, zuul_model.Actionable iObject) {
         list = new Actionable[3];
         list[0] = this.subject = subject;
         list[1] = this.dObject = dObject;
