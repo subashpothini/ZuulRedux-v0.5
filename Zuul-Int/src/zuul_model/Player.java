@@ -79,7 +79,7 @@ public class Player extends Mobile {
      * Try to go to one direction. If there is an exit, enter the new
      * room, otherwise return the exception
      */
-    public void goRoom(Command command) throws ZuulException
+    public void changeRoom(Command command) throws ZuulException
     {
         if(!command.hasSecondWord())
             throw new ZuulException("Go where?");

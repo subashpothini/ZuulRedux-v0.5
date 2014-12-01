@@ -125,7 +125,7 @@ public class Game
         hen.wander();
         String commandWord = command.getCommandWord();
         if (commandWord.equals("go")) {
-            player.goRoom(command);
+            player.changeRoom(command);
             return GameResult.CONTINUE;
         }
         if (commandWord.equals("take")) {
