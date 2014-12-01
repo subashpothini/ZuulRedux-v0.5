@@ -16,11 +16,11 @@ import java.util.*;
  * Modified by John Bovey
  */
 
-public class Room 
+public class Room implements Actionable
 {
-    private String description;
-    private HashMap<String, Room> exits = new HashMap<String, Room>();        // stores exits of this room.
-    private HashMap<String, Item> items = new HashMap<String, Item>();
+    private final String description;
+    private Map<String, Room> exits = new HashMap<String, Room>();        // stores exits of this room.
+    private Map<String, Item> items = new HashMap<String, Item>();
 
     /**
      * Create a room described "description". Initially, it has
@@ -28,11 +28,16 @@ public class Room
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description) 
+    public Room(String description)
     {
         this.description = description;
     }
-    
+
+    public String examine()
+    {
+        return description;
+    }
+
     /**
      * Add the item to the room
      * @param item
@@ -91,7 +96,7 @@ public class Room
      * Get all the items in the room
      * @return the hashmap of items
      */
-    public HashMap<String, Item> getItems()
+    public Map<String, Item> getItems()
     {
         return items;
     }

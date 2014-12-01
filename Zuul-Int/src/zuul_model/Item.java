@@ -4,9 +4,9 @@ package zuul_model;
  *
  * @author jdb
  */
-public class Item {
-    private String name;
-    private String description;
+public class Item implements Actionable{
+    private final String name;
+    private final String description;
     private double weight;
     
     public Item(String name, String description, double weight)
@@ -29,7 +29,7 @@ public class Item {
      * Accessor for item's description
      * @return description
      */
-    public String getDescription()
+    public String examine()
     {
         return description;
     }

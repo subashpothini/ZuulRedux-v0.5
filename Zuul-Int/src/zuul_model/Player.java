@@ -4,13 +4,16 @@ package zuul_model;
  *
  * @author jdb
  */
-public class Player extends Mobile {
+public class Player extends Mobile{
+
     private static final double maxWeight = 15.0; // Max kilos that can be carried
     private static final int maxItems = 2; // Maximum number of items that can be carried
         
-    public Player(Room room) {
-        super(room);
+    public Player(String description, Room room) {
+        super(description, room);
     }
+
+
 
     /**
      * Player attempts to take the item from the room. If successful the item is

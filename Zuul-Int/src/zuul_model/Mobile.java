@@ -5,15 +5,23 @@ import java.util.*;
  *
  * @author jdb
  */
-public class Mobile {
+public class Mobile implements Actionable{
+
+    private final String description;
     private Room currentRoom;
     private Map<String, Item> items = new HashMap<String, Item>();
     
-    public Mobile(Room room)
+    public Mobile(String description, Room room)
     {
         currentRoom = room;
+        this.description = description;
     }
-       
+
+    public String examine()
+    {
+        return description;
+    }
+
     /**
      * mutator for room
      * @param room
