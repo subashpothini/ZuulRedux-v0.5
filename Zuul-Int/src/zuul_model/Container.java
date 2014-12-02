@@ -10,8 +10,8 @@ import java.util.Map;
  */
 public class Container {
 
-    protected Map<String,Item> items;
-    protected List<Item> itemsList;
+    protected Map<String,Item> items; //pro
+    protected List<Item> itemsList; //pro
 
     public Container()
     {
@@ -22,6 +22,7 @@ public class Container {
     public final boolean giveL(Item item)
     {
         itemsList.add(item);
+        items.put(item.getName(), item);
         return true;
     }
 
@@ -32,7 +33,7 @@ public class Container {
 
     public final boolean has(Item item)
     {
-        return has(item);
+        return items.containsValue(item);
     }
 
     public final Item get(String itemName)
@@ -49,8 +50,9 @@ public class Container {
 
     public final boolean take(String itemName)
     {
-        if(items.containsKey(itemName) == true) {
-            this.take(itemsList.get(itemsList.indexOf(itemName)));
+        Item item = items.get(itemName);
+        if(items.containsKey(itemName)) {
+            this.take(itemsList.get(itemsList.indexOf(item)));
             items.remove(itemName);
             return true;
         } else {

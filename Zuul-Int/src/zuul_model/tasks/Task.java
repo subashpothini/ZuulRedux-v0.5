@@ -5,6 +5,7 @@ package zuul_model.tasks;
  */
 public interface Task {
 
-    public boolean performAction();
+    public String getName();
 
+    public boolean performAction();
 }

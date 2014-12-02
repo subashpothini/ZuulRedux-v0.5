@@ -7,9 +7,9 @@ import zuul_model.*;
  * @author jdb
  */
 public class TextUI {
-    private Parser parser;
-    private Game game;
-    private Player player;
+    private Parser parser; //pri
+    private Game game; //pri
+    private Player player; //pri
     
     public TextUI() {
         parser = new Parser();
@@ -19,7 +19,7 @@ public class TextUI {
     /**
      * Print out the opening message for the player.
      */
-    private void printWelcome()
+    private void printWelcome() //pri
     {
         System.out.println();
         System.out.println("Welcome to the World of Zuul!");
@@ -77,7 +77,7 @@ public class TextUI {
      * Here we print some stupid, cryptic message and a list of the 
      * command words.
      */
-    private void printHelp() 
+    private void printHelp()  //pri
     {
         System.out.println("You are lost. You are alone. You wander around");
         System.out.println("the house getting hungrier and hungrier.");

@@ -1,4 +1,7 @@
 package zuul_model;
+import zuul_model.tasks.Examine;
+import zuul_model.tasks.Task;
+
 import java.util.*;
 
 /**
@@ -7,9 +10,9 @@ import java.util.*;
  */
 public class Mobile extends Container implements Actionable{
 
-    private final String description;
-    private Room currentRoom;
-    private Map<String, Item> items = new HashMap<String, Item>();
+    private final String description; //pri
+    private Room currentRoom; //pri
+    private Map<String, Item> items = new HashMap<String, Item>(); //pri
     
     public Mobile(String description, Room room)
     {
@@ -22,8 +25,14 @@ public class Mobile extends Container implements Actionable{
         return description;
     }
 
+    @Override
+    public Task[] getTasks(Player player) {
+        Task[] tasks = new Task[1];
+        int index = 0;
+        tasks[index] = new Examine(player, this, null); index++;
 
-
+        return tasks;
+    }
 
     /**
      * mutator for room

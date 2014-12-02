@@ -6,12 +6,15 @@
 package zuul_model;
 
 
+import zuul_model.tasks.Task;
+
 /**
  *
  * @author Sam
  */
 public interface Actionable {
 
-
     public String examine();
+
+    public Task[] getTasks(Player player);
 }

@@ -6,8 +6,8 @@ import java.util.*;
  */
 public class Game 
 {
-    protected Player player;
-    private Hen hen;
+    protected Player player; //pro
+    private Hen hen; //pri
     HashMap<String, Room> rooms = new HashMap<String, Room>();
         
     /**
@@ -16,11 +16,12 @@ public class Game
     public Game() 
     {
         createRooms();
-        player = new Player("this is a player of the game", rooms.get("hallway"));
+        player = new Player("this is a player of the game", rooms.get("larder"));
         hen = new Hen(rooms.get("henhouse"), 3);
     }
 
-    public Player getPlayer() {
+    public Player getPlayer() //pri
+    {
         return player;
     }
 
@@ -31,7 +32,7 @@ public class Game
      * @param room2
      * @param exit2 of room2 leads to room1
      */
-    private void connect(String room1, String exit1, String room2, String exit2)
+    private void connect(String room1, String exit1, String room2, String exit2) //pri
     {
         rooms.get(room1).setExit(exit1, rooms.get(room2));
         rooms.get(room2).setExit(exit2, rooms.get(room1));
@@ -42,7 +43,7 @@ public class Game
      * @param room
      * @param item
      */
-    private void addItem(String room, Item item)
+    private void addItem(String room, Item item) //pri
     {
         rooms.get(room).give(item);
     }
@@ -50,7 +51,7 @@ public class Game
     /**
      * Create all the rooms and link their exits together.
      */
-    private void createRooms()
+    private void createRooms() //pri
     {
       
         // create the rooms
@@ -96,7 +97,7 @@ public class Game
      * @param name the item
      * @return true if the item is held by the player or is in the room
      */
-    private boolean hasItem(String name)
+    private boolean hasItem(String name) //pri
     {
         return player.hasItem(name) || player.getRoom().has(name);
     }
@@ -105,7 +106,7 @@ public class Game
      * The item is used (i.e. destroyed) if it is available
      * @param name item name
      */
-    private void useItem(String name)
+    private void useItem(String name) //pri
     {
         player.useItem(name);
         player.getRoom().useItem(name);

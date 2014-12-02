@@ -1,5 +1,8 @@
 package zuul_model;
 
+import zuul_model.tasks.Examine;
+import zuul_model.tasks.Task;
+
 import java.util.*;
 
 /**
@@ -18,9 +21,9 @@ import java.util.*;
 
 public class Room extends Container implements Actionable
 {
-    private final String description;
-    private Map<String, Room> exits = new HashMap<String, Room>();        // stores exits of this room.
-    private Map<String, Item> items = new HashMap<String, Item>();
+    private final String description; //pri
+    private Map<String, Room> exits = new HashMap<String, Room>();        // stores exits of this room. //pri
+    private Map<String, Item> items = new HashMap<String, Item>(); //pri
 
     /**
      * Create a room described "description". Initially, it has
@@ -38,8 +41,14 @@ public class Room extends Container implements Actionable
         return description;
     }
 
+    @Override
+    public Task[] getTasks(Player player) {
+        Task[] tasks = new Task[1];
+        int index = 0;
+        tasks[index] = new Examine(player, this, null); index++;
 
-
+        return tasks;
+    }
     
     /**
      * Destroy the item if it exists, otherwise quietly do nothing.
@@ -140,7 +149,7 @@ public class Room extends Container implements Actionable
      * "Exits: north west".
      * @return Details of the room's exits.
      */
-    private String getExitString()
+    private String getExitString() //pri
     {
         String returnString = "Exits:";
         Set<String> keys = exits.keySet();
@@ -154,7 +163,7 @@ public class Room extends Container implements Actionable
      * Create a list of all the items in the room
      * @return Descriptive string
      */
-    private String getItemString()
+    private String getItemString() //pri
     {
         Set<String> keys = items.keySet();
         if (keys.isEmpty())

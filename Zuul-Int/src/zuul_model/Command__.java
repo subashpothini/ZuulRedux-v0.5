@@ -21,8 +21,8 @@ package zuul_model;
 
 public class Command__
 {
-    private String commandWord;
-    private String secondWord;
+    private String commandWord; //pri
+    private String secondWord; //pri
 
     /**
      * Create a command object. First and second word must be supplied, but

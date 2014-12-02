@@ -6,7 +6,6 @@
 package zuul_model;
 
 
-import zuul_model.tasks.Task;
 
 /**
  *
@@ -14,8 +13,8 @@ import zuul_model.tasks.Task;
  */
 public class Command {
 
-    protected final Actionable subject, iObject, dObject;
-    protected final Object[] list;
+    protected final Actionable subject, iObject, dObject; //pro
+    protected final Object[] list; //pro
 
     public Command(zuul_model.Actionable subject, zuul_model.Actionable dObject, zuul_model.Actionable iObject) {
         list = new Actionable[3];

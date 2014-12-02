@@ -1,13 +1,21 @@
 package zuul_model;
 
+import zuul_model.tasks.Examine;
+import zuul_model.tasks.Task;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author jdb
  */
 public class Item implements Actionable{
-    private final String name;
-    private final String description;
-    private double weight;
+    private final String name; //pri
+    private final String description; //pri
+    private double weight; //pri
+    private List<Method> methodList;
     
     public Item(String name, String description, double weight)
     {
@@ -33,7 +41,17 @@ public class Item implements Actionable{
     {
         return description;
     }
-    
+
+    @Override
+    public Task[] getTasks(Player player) {
+        Task[] tasks = new Task[1];
+        int index = 0;
+        tasks[index] = new Examine(player, this, null); index++;
+
+        return tasks;
+    }
+
+
     /**
      * Accessor for item's weight in killograms
      * Negative weights are carrying capacities.

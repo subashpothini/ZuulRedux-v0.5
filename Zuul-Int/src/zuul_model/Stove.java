@@ -7,7 +7,7 @@ package zuul_model;
  * state to record whether it is burning or not.
  */
 public class Stove extends Item {
-    private boolean burning = false;
+    private boolean burning = false; //pri
     
     public Stove(String name, String description, double weight)
     {

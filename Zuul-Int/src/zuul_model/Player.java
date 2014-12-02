@@ -1,5 +1,7 @@
 package zuul_model;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 /**
  *
  * @author jdb
@@ -7,8 +9,8 @@ package zuul_model;
 public class Player extends Mobile
 {
 
-    private static final double maxWeight = 15.0; // Max kilos that can be carried
-    private static final int maxItems = 2; // Maximum number of items that can be carried
+    private static final double maxWeight = 15.0; // Max kilos that can be carried //pri
+    private static final int maxItems = 2; // Maximum number of items that can be carried //pri
         
     public Player(String description, Room room) {
         super(description, room);
@@ -42,7 +44,7 @@ public class Player extends Mobile
      */
     public void inform(String message)
     {
-
+        System.out.println(message);
     }
     
     /**
@@ -95,7 +97,7 @@ public class Player extends Mobile
     }
     
     /** 
-     * Try to go to one direction. If there is an exit, enter the new
+     * Try to go to one direction. If there igo easts an exit, enter the new
      * room, otherwise return the exception
      */
     public void changeRoom(Command__ command) throws ZuulException

@@ -8,10 +8,11 @@ import zuul_model.Room;
  */
 public class Examine implements Task{
 
-    private zuul_model.Actionable subject;
-    private zuul_model.Actionable dObject;
-    private zuul_model.Actionable iObject;
-    private Player testPlayer;
+    private static String NAME = "Examine";
+    private zuul_model.Actionable subject; //pri
+    private zuul_model.Actionable dObject; //pri
+    private zuul_model.Actionable iObject; //pri
+    private Player testPlayer; //pri
 
     /*
     examine task: 'subject' examines 'direct object'
@@ -26,6 +27,15 @@ public class Examine implements Task{
         this.dObject = dObject;
         this.iObject = iObject;
         testPlayer = new Player("", new Room(""));
+    }
+
+    @Override
+    /*
+    @return name of Task
+     */
+    public String getName()
+    {
+        return NAME;
     }
 
     @Override

@@ -8,6 +8,7 @@ import zuul_model.Room;
  */
 public class Go implements Task{
 
+    private static String NAME = "Go";
     private zuul_model.Actionable subject;
     private zuul_model.Actionable dObject;
     private zuul_model.Actionable iObject;
@@ -28,6 +29,15 @@ public class Go implements Task{
         this.iObject = iObject;
         testRoom = new Room("");
         testPlayer = new Player("", testRoom);
+    }
+
+    @Override
+    /*
+    @return name of Task
+     */
+    public String getName()
+    {
+        return NAME;
     }
 
     @Override
