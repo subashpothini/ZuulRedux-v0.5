@@ -8,8 +8,8 @@ import zuul_model.*;
  */
 public class TextUI {
     private Parser parser; //pri
-    private Game game; //pri
-    private Player player; //pri
+    public Game game; //pri
+    public Player player; //pri
     
     public TextUI() {
         parser = new Parser();

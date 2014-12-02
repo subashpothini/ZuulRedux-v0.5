@@ -66,9 +66,24 @@ public class Game
         rooms.put("hallway", new Room("a hallway"));
         rooms.put("library", new Room("a library with bookshelves"));
         rooms.put("cellar", new Room("a cellar"));
-        
+
+        // create doors
+        int i = 0;
+        this.makeDoor("passage","larder", i); i++;
+        this.makeDoor("passage","larder", i); i++;
+        this.makeDoor("passage","kitchen", i); i++;
+        this.makeDoor("passage","cellar", i); i++;
+        this.makeDoor("kitchen","courtyard", i); i++;
+        this.makeDoor("kitchen","hallway", i); i++;
+        this.makeDoor("hallway", "attic", i); i++;
+        this.makeDoor("hallway","library", i); i++;
+        this.makeDoor("courtyard","dairy", i); i++;
+        this.makeDoor("courtyard","henhouse", i); i++;
+        this.makeDoor("courtyard", "shed", i);
+        i++;
+
         // initialise room exits
-        connect("passage","west","larder","east");
+        connect("passage", "west", "larder","east");
         connect("passage", "east", "kitchen", "west");
         connect("passage", "down", "cellar", "up");
         connect("kitchen", "east", "courtyard", "west");
@@ -91,7 +106,13 @@ public class Game
         addItem("shed", new Item("trolley", "a sack trolley", -100.0));
         addItem("kitchen", new Stove("stove", "an old but working wood-burning stove", 1000.0));
     }
-    
+
+    private void makeDoor(String start, String end, int index)
+    {
+        Room[] links = {rooms.get(start), rooms.get(end)};
+        new Door("door " + index, links);
+    }
+
     /**
      * Determine whether an item is available
      * @param name the item

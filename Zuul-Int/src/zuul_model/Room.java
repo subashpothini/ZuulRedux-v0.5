@@ -22,8 +22,8 @@ import java.util.*;
 public class Room extends Container implements Actionable
 {
     private final String description; //pri
-    private Map<String, Room> exits = new HashMap<String, Room>();        // stores exits of this room. //pri
-    private Map<String, Item> items = new HashMap<String, Item>(); //pri
+    private Map<String, Room> exits = new HashMap<String, Room>();        // stores exits of this room. //pri //pri
+    private List<Door> doors = new ArrayList<Door>();
 
     /**
      * Create a room described "description". Initially, it has
@@ -49,7 +49,16 @@ public class Room extends Container implements Actionable
 
         return tasks;
     }
-    
+
+    public void addDoor(Door door)
+    {
+        doors.add(door);
+    }
+
+    public Door getDoor(int index) {
+        return doors.get(index);
+    }
+
     /**
      * Destroy the item if it exists, otherwise quietly do nothing.
      * @param name of item
@@ -73,7 +82,9 @@ public class Room extends Container implements Actionable
         throw new ZuulException("There is no " + name + " in the room!");
     }
 
-    /*
+
+
+    /**
     public List<Item> ()
     {
         return ItemList // need to implemet this
@@ -116,7 +127,8 @@ public class Room extends Container implements Actionable
         return exits.keySet();
     }
     
-    /* Return a collection of all the rooms adjoining this one
+    /**
+    Return a collection of all the rooms adjoining this one
      */
     Collection<Room> adjoiningRooms()
     {
