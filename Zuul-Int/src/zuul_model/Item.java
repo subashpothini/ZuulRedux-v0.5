@@ -11,7 +11,7 @@ import java.util.List;
  *
  * @author jdb
  */
-public class Item implements Actionable{
+public class Item implements Actionable {
     private final String name; //pri
     private final String description; //pri
     private double weight; //pri

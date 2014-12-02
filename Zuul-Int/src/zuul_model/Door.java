@@ -10,7 +10,7 @@ import java.util.Random;
  * Created by Sam on 02/12/2014.
  */
 
-public class Door implements Actionable{
+public class Door implements Actionable {
 
     private final String description;
     private Room[] exits;

@@ -1,10 +1,7 @@
 package zuul_gui;
 
-import zuul_model.Game;
-import zuul_model.Player;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 /**
@@ -13,6 +10,7 @@ import java.awt.*;
 public class ZuulGUI extends JFrame {
 
     private UserView view = new UserView();
+    private JPanel left, right;
 
     public ZuulGUI() {
         super();
@@ -28,7 +26,9 @@ public class ZuulGUI extends JFrame {
     {
         this.setMaximumSize(new Dimension(500, 300));
 
+        left = new JPanel(new BorderLayout(5,5));
         this.add(view, BorderLayout.CENTER);
+
 
 
         this.pack();

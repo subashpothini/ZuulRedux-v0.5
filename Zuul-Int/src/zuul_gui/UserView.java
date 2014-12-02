@@ -5,8 +5,7 @@ import zuul_model.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 /**
  * Created by Sam on 02/12/2014.
@@ -41,12 +40,23 @@ public class UserView extends JPanel {
         scrollPane.setMaximumSize(new Dimension(200, 200));
 
         this.add(scrollPane, BorderLayout.CENTER);
-        this.add(new ScrollButton("↑", new Point(0, -100), viewPort), BorderLayout.NORTH);
-        this.add(new ScrollButton("→", new Point(200, 0), viewPort), BorderLayout.EAST);
-        this.add(new ScrollButton("▼", new Point(0, 100), viewPort), BorderLayout.SOUTH);
-        this.add(new ScrollButton("←", new Point(-200, 0), viewPort), BorderLayout.WEST);
-
+        this.add(new ScrollButton("^", new Point(0, -100), viewPort), BorderLayout.NORTH);
+        this.add(new ScrollButton(">", new Point(200, 0), viewPort), BorderLayout.EAST);
+        this.add(new ScrollButton("v", new Point(0, 100), viewPort), BorderLayout.SOUTH);
+        this.add(new ScrollButton("<", new Point(-200, 0), viewPort), BorderLayout.WEST);
+/*
+        this.addMouseListener(MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Point pointer = e.getPoint()
+            }
+        });
+*/
         this.setVisible(true);
+    }
+
+    private void processClick(Point pointer) {
+
     }
 
     private class ScrollButton extends JButton {

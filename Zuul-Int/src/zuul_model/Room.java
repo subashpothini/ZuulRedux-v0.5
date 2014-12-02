@@ -24,6 +24,7 @@ public class Room extends Container implements Actionable
     private final String description; //pri
     private Map<String, Room> exits = new HashMap<String, Room>();        // stores exits of this room. //pri //pri
     private List<Door> doors = new ArrayList<Door>();
+    //private ClickableList  clickable = new CickableList();
 
     /**
      * Create a room described "description". Initially, it has
