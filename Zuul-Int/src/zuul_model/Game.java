@@ -71,6 +71,8 @@ public class Game
 
         // create doors
         int i = 0;
+        Door larderDoor = new Door("door " + 1, new Room[] {rooms.get("larder"), rooms.get("passage")});
+        rooms.get("larder").addClickable(larderDoor, new Point(440, 250), new Point(120,170));
         this.makeDoor("passage","larder", i); i++;
         this.makeDoor("passage","larder", i); i++;
         this.makeDoor("passage","kitchen", i); i++;

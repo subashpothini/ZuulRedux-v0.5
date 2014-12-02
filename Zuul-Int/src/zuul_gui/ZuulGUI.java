@@ -27,7 +27,8 @@ public class ZuulGUI extends JFrame {
         this.setMaximumSize(new Dimension(500, 300));
 
         left = new JPanel(new BorderLayout(5,5));
-        this.add(view, BorderLayout.CENTER);
+        left.add(view, BorderLayout.CENTER);
+        this.add(left, BorderLayout.CENTER);
 
 
 

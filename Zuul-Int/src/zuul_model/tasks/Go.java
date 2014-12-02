@@ -57,6 +57,7 @@ public class Go implements Task{
         Room dObjectRoom = (Room) dObject;
         //perform action
         subjectPlayer.changeRoom(dObjectRoom);
+        subjectPlayer.inform(dObjectRoom.examine());
         return true;
     }
 }
