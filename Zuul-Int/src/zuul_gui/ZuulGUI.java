@@ -21,7 +21,6 @@ public class ZuulGUI extends JFrame {
     }
 
 
-
     private void buildInterface()
     {
         this.setMaximumSize(new Dimension(500, 300));
