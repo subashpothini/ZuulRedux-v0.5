@@ -3,7 +3,9 @@ package zuul_model;
 import zuul_model.tasks.Examine;
 import zuul_model.tasks.Task;
 
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Class Room - a room in an adventure game.
@@ -24,7 +26,7 @@ public class Room extends Container implements Actionable
     private final String description; //pri
     private Map<String, Room> exits = new HashMap<String, Room>();        // stores exits of this room. //pri //pri
     private List<Door> doors = new ArrayList<Door>();
-    //private ClickableList  clickable = new CickableList();
+    private ClickableList  clickable = new ClickableList();
 
     /**
      * Create a room described "description". Initially, it has
@@ -58,6 +60,14 @@ public class Room extends Container implements Actionable
 
     public Door getDoor(int index) {
         return doors.get(index);
+    }
+
+    public Actionable getActionable(Point point) {
+        return clickable.checkPoint(point);
+    }
+
+    public void addClickable(Actionable actionable, Point pointLoc, Point pointSize) {
+        clickable.addObject(actionable, pointLoc, pointSize);
     }
 
     /**

@@ -1,4 +1,5 @@
 package zuul_model;
+import java.awt.*;
 import java.util.*;
 
 
@@ -55,9 +56,10 @@ public class Game
     {
       
         // create the rooms
+        Room larder = new Room("cool larder");
         rooms.put("kitchen", new Room("an old-fashioned kitchen"));
         rooms.put("passage", new Room("a passage"));
-        rooms.put("larder", new Room("cool larder"));
+        rooms.put("larder", larder);
         rooms.put("courtyard", new Room("a cobbled courtyard"));
         rooms.put("shed", new Room("a large storage shed"));
         rooms.put("henhouse", new Room("a hen house"));
@@ -83,7 +85,7 @@ public class Game
         i++;
 
         // initialise room exits
-        connect("passage", "west", "larder","east");
+        connect("passage", "west", "larder", "east");
         connect("passage", "east", "kitchen", "west");
         connect("passage", "down", "cellar", "up");
         connect("kitchen", "east", "courtyard", "west");
@@ -95,9 +97,17 @@ public class Game
         connect("courtyard", "north", "shed", "south");
         
         // add some items
-        addItem("larder", new Item("butter", "a pack of fresh butter", 0.5));
-        addItem("larder", new Item("flour", "a large sack of flour", 100.0));
-        addItem("larder", new Item("sugar", "a bag of sugar", 1.0));
+        Item item;
+        item = new Item("butter", "a pack of fresh butter", 0.5);
+        addItem("larder", item);
+
+        item = new Item("flour", "a large sack of flour", 100.0);
+        addItem("larder", item);
+
+        item = new Item("sugar", "a bag of sugar", 1.0);
+        addItem("larder", item);
+        larder.addClickable(item, new Point(1400,120), new Point(150,130));
+
         addItem("cellar", new Item("cake-tin", "a clean cake tin", 0.3));
         addItem("library", new Item("recipe", "a cake recipe using eggs, flour, sugar, butter and milk", 0.0));
         addItem("dairy", new Item("milk", "a jug of fresh milk", 1.0));
@@ -105,6 +115,7 @@ public class Game
         addItem("attic", new Item("matches", "a box of matches", 0.0));
         addItem("shed", new Item("trolley", "a sack trolley", -100.0));
         addItem("kitchen", new Stove("stove", "an old but working wood-burning stove", 1000.0));
+
     }
 
     private void makeDoor(String start, String end, int index)

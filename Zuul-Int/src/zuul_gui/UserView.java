@@ -1,7 +1,9 @@
 package zuul_gui;
 
+import zuul_model.Actionable;
 import zuul_model.Game;
 import zuul_model.Player;
+import zuul_model.tasks.Task;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +21,8 @@ public class UserView extends JPanel {
     private JScrollPane scrollPane = new JScrollPane();
     private JLabel image = new JLabel(new ImageIcon(PATH));
     private JViewport viewPort;
+    private JPopupMenu popupMenu;
+    private JFrame frame = null;
 
 
     public UserView()
@@ -44,19 +48,49 @@ public class UserView extends JPanel {
         this.add(new ScrollButton(">", new Point(200, 0), viewPort), BorderLayout.EAST);
         this.add(new ScrollButton("v", new Point(0, 100), viewPort), BorderLayout.SOUTH);
         this.add(new ScrollButton("<", new Point(-200, 0), viewPort), BorderLayout.WEST);
-/*
-        this.addMouseListener(MouseAdapter() {
+
+        viewPort.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                Point pointer = e.getPoint()
+                Point point = e.getPoint();
+                //convert to image global coordinate system
+                point = SwingUtilities.convertPoint(viewPort, point, image);
+                Actionable actionable = player.getRoom().getActionable(point);
+                if (actionable == null) {
+                    System.out.println("MouseClickEvent - x = " + point.x + ", y = " + point.y);
+                } else {
+                    buildPopup(actionable.getTasks(player));
+                    frame = new JFrame();
+                    frame.setUndecorated(true);
+                    frame.setLocation(MouseInfo.getPointerInfo().getLocation());
+                    frame.add(popupMenu);
+                    frame.pack();
+                    frame.repaint();
+                    frame.setVisible(true);
+                    viewPort.repaint();
+                    try {
+                        Thread.sleep(4000);
+                    } catch (InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
+                    frame = null;
+                }
             }
         });
-*/
+
         this.setVisible(true);
     }
 
-    private void processClick(Point pointer) {
-
+    private void buildPopup(Task[] tasks) {
+        popupMenu = new JPopupMenu();
+        JMenuItem menuItem;
+        for(Task task : tasks) {
+            menuItem = new JMenuItem(task.getName());
+            menuItem.addActionListener(e ->
+                    task.performAction());
+            popupMenu.add(menuItem);
+        }
+        popupMenu.setMaximumSize(new Dimension(40, tasks.length * 20));
     }
 
     private class ScrollButton extends JButton {
