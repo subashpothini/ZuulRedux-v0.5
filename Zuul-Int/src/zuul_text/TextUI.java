@@ -10,12 +10,13 @@ public class TextUI {
     private Parser parser; //pri
     public Game game; //pri
     public Player player; //pri
-    
+
     public TextUI() {
         parser = new Parser();
         game = new Game();
         player = game.getPlayer();
     }
+
     /**
      * Print out the opening message for the player.
      */
