@@ -100,22 +100,22 @@ public class Game
         
         // add some items
         Item item;
-        item = new Item("butter", "a pack of fresh butter", 0.5);
+        item = new Item("butter", "a pack of fresh butter", 0.5, rooms.get("larder"));
         addItem("larder", item);
 
-        item = new Item("flour", "a large sack of flour", 100.0);
+        item = new Item("flour", "a large sack of flour", 100.0, rooms.get("larder"));
         addItem("larder", item);
 
-        item = new Item("sugar", "a bag of sugar", 1.0);
+        item = new Item("sugar", "a bag of sugar", 1.0, rooms.get("larder"));
         addItem("larder", item);
         larder.addClickable(item, new Point(1400,120), new Point(150,130));
 
-        addItem("cellar", new Item("cake-tin", "a clean cake tin", 0.3));
-        addItem("library", new Item("recipe", "a cake recipe using eggs, flour, sugar, butter and milk", 0.0));
-        addItem("dairy", new Item("milk", "a jug of fresh milk", 1.0));
-        addItem("courtyard", new Item("fire-wood", "a stack of dry fire wood", 15.0));
-        addItem("attic", new Item("matches", "a box of matches", 0.0));
-        addItem("shed", new Item("trolley", "a sack trolley", -100.0));
+        addItem("cellar", new Item("cake-tin", "a clean cake tin", 0.3, rooms.get("cellar")));
+        addItem("library", new Item("recipe", "a cake recipe using eggs, flour, sugar, butter and milk", 0.0, rooms.get("library")));
+        addItem("dairy", new Item("milk", "a jug of fresh milk", 1.0, rooms.get("dairy")));
+        addItem("courtyard", new Item("fire-wood", "a stack of dry fire wood", 15.0, rooms.get("courtyard")));
+        addItem("attic", new Item("matches", "a box of matches", 0.0, rooms.get("attic")));
+        addItem("shed", new Item("trolley", "a sack trolley", -100.0, rooms.get("shed")));
         addItem("kitchen", new Stove("stove", "an old but working wood-burning stove", 1000.0));
 
     }
@@ -218,7 +218,7 @@ public class Game
             for (String ingredient: ingredients) {
                 useItem(ingredient);
             }
-            room.give(new Item("cake", "A delicious freshly baked cake", 0.0));
+            room.give(new Item("cake", "A delicious freshly baked cake", 0.0, room));
             return GameResult.CONTINUE;
         }
         if (commandWord.equals("eat")) {

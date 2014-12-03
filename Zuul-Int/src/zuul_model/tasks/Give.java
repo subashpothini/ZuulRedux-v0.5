@@ -29,7 +29,7 @@ public class Give implements Task{
         this.subject = subject;
         this.dObject = dObject;
         this.iObject = iObject;
-        testItem = new Item("", "", 0);
+        testItem = new Item("", "", 0, null);
         testContainer = new Container();
     }
 
@@ -63,32 +63,21 @@ public class Give implements Task{
             return false;
         }
 
-        //Populate the array for testing and Item transfer
-        Container[] array = new Container[2];
-        this.populateArray(array, (Container) dObject, (Item) subject);
-        this.populateArray(array, (Container) iObject, (Item) subject);
-
-        //Test that there is a value in each array slot, and hence that only one of them contains the object
-        if(array[0] == null || array[1] == null) {
+        // test that the iObject contains the Item
+        if(!((Container) iObject).has((Item) subject)) {
             return false;
         }
 
-        //perform swap and return true afterwards
-        array[1].give((Item) subject);
-        array[0].take((Item) subject);
+        // that that the dObject does not contain the Item
+        if(((Container) dObject).has((Item) subject)) {
+            return false;
+        }
+
+
+        // transfer item to dObject from iObject
+        ((Container) dObject).give((Item) subject);
+        ((Container) iObject).take((Item) subject);
         return true;
     }
 
-    /*
-    assigns teh container to the first slot of teh array if it has a copy og teh subject
-    and teh second slot if not.
-     */
-    private void populateArray(Container[] array, Container container, Item item)
-    {
-        if(container.has(item)) {
-            array[0] = container;
-        } else {
-            array[1] = container;
-        }
-    }
 }

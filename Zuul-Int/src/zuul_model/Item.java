@@ -15,13 +15,14 @@ public class Item implements Actionable {
     private final String name; //pri
     private final String description; //pri
     private double weight; //pri
-    private List<Method> methodList;
+    private Container owner;
     
-    public Item(String name, String description, double weight)
+    public Item(String name, String description, double weight, Container owner)
     {
         this.name = name;
         this.description = description;
         this.weight = weight;
+        this.owner = owner;
     }
     
     /**
@@ -61,7 +62,15 @@ public class Item implements Actionable {
     {
         return weight;
     }
-    
+
+    public Container getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Container owner) {
+        this.owner = owner;
+    }
+
     /**
      * More detailed description
      * @param addName include the item's name

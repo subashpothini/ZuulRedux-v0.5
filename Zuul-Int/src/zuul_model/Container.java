@@ -12,6 +12,7 @@ public class Container {
 
     protected Map<String,Item> items; //pro
     protected List<Item> itemsList; //pro
+    protected Item[] itemArray;
 
     public Container()
     {
