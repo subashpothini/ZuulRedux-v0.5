@@ -1,8 +1,10 @@
 package zuul_model;
 
 import zuul_model.tasks.Examine;
+import zuul_model.tasks.Give;
 import zuul_model.tasks.Task;
 
+import java.awt.*;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,17 +14,30 @@ import java.util.List;
  * @author jdb
  */
 public class Item implements Actionable {
+
+    private static final Point DEFAULT_SIZE = new Point(200,200);
     private final String name; //pri
     private final String description; //pri
+    private final Point size;
     private double weight; //pri
     private Container owner;
-    
+
+    public Item(String name, String description, double weight, Container owner, Point size)
+    {
+        this.name = name;
+        this.description = description;
+        this.weight = weight;
+        this.owner = owner;
+        this.size = size;
+    }
+
     public Item(String name, String description, double weight, Container owner)
     {
         this.name = name;
         this.description = description;
         this.weight = weight;
         this.owner = owner;
+        size = DEFAULT_SIZE;
     }
     
     /**
@@ -45,9 +60,25 @@ public class Item implements Actionable {
 
     @Override
     public Task[] getTasks(Player player) {
-        Task[] tasks = new Task[1];
-        int index = 0;
-        tasks[index] = new Examine(player, this, null); index++;
+        ArrayList<Task> tempTask = new ArrayList<Task>();
+
+        // create Examine Task
+        tempTask.add(new Examine(player, this, null));
+
+        // create Give task (if applicable)
+        if(player == owner) {
+            tempTask.add(new Give(this, player.getRoom(), player));
+            taskNumber++;
+        } else if (player.getRoom() == owner) {
+            tempTask.add(new Give(this, player, player.getRoom()));
+            taskNumber++;
+        }
+
+
+
+        Task[] tasks = tempTask.toArray(new Task[]);
+
+
 
         return tasks;
     }

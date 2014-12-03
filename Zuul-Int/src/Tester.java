@@ -2,7 +2,6 @@ import zuul_model.Game;
 import zuul_model.Player;
 import zuul_model.ZuulException;
 import zuul_model.tasks.Task;
-import zuul_text.TextUI;
 
 /**
  * Created by Sam on 02/12/2014.
@@ -12,12 +11,7 @@ public class Tester {
     private Game game;
     private Player player;
 
-    public Tester(TextUI ui) {
-        game = ui.game;
-        player = ui.player;
 
-        this.runTests();
-    }
 
     public void runTests() {
         try {

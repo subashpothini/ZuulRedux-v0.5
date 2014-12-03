@@ -9,9 +9,9 @@ package zuul_model;
 public class Stove extends Item {
     private boolean burning = false; //pri
     
-    public Stove(String name, String description, double weight)
+    public Stove(String name, String description, double weight, Container owner)
     {
-        super(name, description, weight);
+        super(name, description, weight, owner);
     }
     
     /**

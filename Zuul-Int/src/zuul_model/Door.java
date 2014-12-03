@@ -4,6 +4,7 @@ import zuul_model.tasks.Examine;
 import zuul_model.tasks.Go;
 import zuul_model.tasks.Task;
 
+import java.awt.*;
 import java.util.Random;
 
 /**
@@ -12,13 +13,27 @@ import java.util.Random;
 
 public class Door implements Actionable {
 
+    private static final Point DEFAULT_SIZE = new Point(200,200);
     private final String description;
+    private final Point size;
     private Room[] exits;
+
+
+    public Door(String description, Room[] exits, Point size)
+    {
+        this.description = description;
+        this.exits = exits;
+        this.size = size;
+        for(Room room : exits) {
+            room.addDoor(this);
+        }
+    }
 
     public Door(String description, Room[] exits)
     {
         this.description = description;
         this.exits = exits;
+        this.size = DEFAULT_SIZE;
         for(Room room : exits) {
             room.addDoor(this);
         }

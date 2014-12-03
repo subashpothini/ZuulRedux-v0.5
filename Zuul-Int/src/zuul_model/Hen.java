@@ -21,7 +21,7 @@ public class Hen extends Mobile {
         rand = new Random();
         this.eggs = eggs;
         for (int i = 1; i <= eggs; i++)
-            addItem(new Item("egg" + i, "a freshly laid egg.", 0.1));
+            addItem(new Item("egg" + i, "a freshly laid egg.", 0.1, room));
     }
     
     /**

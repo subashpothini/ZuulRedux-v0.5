@@ -96,26 +96,6 @@ public class Player extends Mobile
         return returnString;
     }
     
-    /** 
-     * Try to go to one direction. If there igo easts an exit, enter the new
-     * room, otherwise return the exception
-     */
-    public void changeRoom(Command__ command) throws ZuulException
-    {
-        if(!command.hasSecondWord()) {
-            throw new ZuulException("Go where?");
-        }
 
-        String direction = command.getSecondWord();
-
-        // Try to leave current room.
-        Room nextRoom = getRoom().getExit(direction);
-
-        if (nextRoom == null) {
-            throw new ZuulException("There is no door!");
-        }
-        
-        changeRoom(nextRoom);
-    }
 
 }

@@ -116,7 +116,7 @@ public class Game
         addItem("courtyard", new Item("fire-wood", "a stack of dry fire wood", 15.0, rooms.get("courtyard")));
         addItem("attic", new Item("matches", "a box of matches", 0.0, rooms.get("attic")));
         addItem("shed", new Item("trolley", "a sack trolley", -100.0, rooms.get("shed")));
-        addItem("kitchen", new Stove("stove", "an old but working wood-burning stove", 1000.0));
+        addItem("kitchen", new Stove("stove", "an old but working wood-burning stove", 1000.0, rooms.get("kitchen")));
 
     }
 
@@ -146,96 +146,7 @@ public class Game
         player.getRoom().useItem(name);
     }
     
-    /**
-     * Attempt to make the move described by the command.
-     * @param command
-     * @return either SUCCESS (game won), QUIT or CONTINUE
-     * @throws zuul_model.ZuulException if the command can not me obeyed
-     */
-    public GameResult move(Command__ command) throws ZuulException
-    {
-        Stove stove;
-        Room room = player.getRoom();
 
-        hen.wander();
-        String commandWord = command.getCommandWord();
-        if (commandWord.equals("go")) {
-            player.changeRoom(command);
-            return GameResult.CONTINUE;
-        }
-        if (commandWord.equals("take")) {
-            player.takeItem(command.getSecondWord());
-            return GameResult.CONTINUE;
-        }
-        if (commandWord.equals("drop")) {
-            player.dropItem(command.getSecondWord());
-            return GameResult.CONTINUE;
-        }
-        
-        if (commandWord.equals("light")) {
-            if (!room.has(command.getSecondWord())) {
-                throw new ZuulException("There is no " + command.getSecondWord()
-                        + " in this room!");
-            }
-            try {
-                stove = (Stove)room.getItem(command.getSecondWord());
-            }
-            catch (ClassCastException e) {
-                throw new ZuulException(command.getSecondWord() + " is not a stove!");
-            }
-            if (!hasItem("matches")) {
-                throw new ZuulException("You have nothing to light it with!");
-            }
-            if (!room.has("fire-wood")) {
-                throw new ZuulException("A stove needs fuel!");
-            }
-            stove.light();
-            useItem("fire-wood");
-            return GameResult.CONTINUE;
-        }
-        if (commandWord.equals("bake")) {
-            if (!command.getSecondWord().equals("cake"))
-                throw new ZuulException("You cannot bake one of those!");
-            if (!hasItem("stove"))
-                throw new ZuulException("There is no stove!");
-            stove = (Stove)room.getItem("stove");
-            if (!stove.hot())
-                throw new ZuulException("You cannot make a cake in a cold stove.");
-            if (!hasItem("recipe"))
-                throw new ZuulException("You will need a cake recipe.");
-            if (!hasItem("cake-tin"))
-                throw new ZuulException("There is nothing to make it in.");
-            String[] ingredients = {"butter", "sugar", "flour", "milk"};
-            for (String ingredient: ingredients) {
-                if (!hasItem(ingredient))
-                    throw new ZuulException("You need "+ingredient+" to make a cake.");
-            }
-            String[] eggs = {"egg1", "egg2", "egg3"};
-            for (String egg: eggs) {
-                if (!hasItem(egg))
-                    throw new ZuulException("You need 3 eggs to make a cake.");
-            }
-            for (String ingredient: ingredients) {
-                useItem(ingredient);
-            }
-            room.give(new Item("cake", "A delicious freshly baked cake", 0.0, room));
-            return GameResult.CONTINUE;
-        }
-        if (commandWord.equals("eat")) {
-            String food = command.getSecondWord();
-            if (food.equals("cake")) {
-                if (hasItem("cake")) {
-                    useItem("cake");
-                    return GameResult.SUCCESS;
-                }
-                throw new ZuulException("There is no cake!");
-            }
-            throw new ZuulException("Yuk!!!");
-        }
-        if (commandWord.equals("quit"))
-            return GameResult.QUIT;
-        throw new ZuulException("Command not recognised");
-    }
     
     /**
      * Print out a description of the current state of the game.
