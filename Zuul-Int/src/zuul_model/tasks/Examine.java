@@ -44,15 +44,16 @@ public class Examine implements Task{
     @return false otherwise
      */
     public boolean performAction() {
-        //Test that the input values are appropriate & replace test value with subject
-        if (subject.getClass().getName() != testPlayer.getClass().getName()) {
-            return false;
-        } else {
-            testPlayer = (Player) subject;
-        }
+
+        // create test boolean
+        boolean test;
+
+        //Test that the subject is a Player
+        test = subject.getClass().getName() != testPlayer.getClass().getName();
+        assert test == true : "(Task) Examine.subject is not a Player";
 
         //perform action
-        testPlayer.inform(dObject.examine());
+        ((Player) subject).inform(dObject.examine());
         return true;
     }
 }

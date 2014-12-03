@@ -1,5 +1,7 @@
 package zuul_model.tasks;
 
+import zuul_model.Container;
+import zuul_model.Item;
 import zuul_model.Player;
 import zuul_model.Room;
 
@@ -24,7 +26,7 @@ public class Go implements Task{
     public Go (zuul_model.Actionable subject,
                     zuul_model.Actionable dObject,
                     zuul_model.Actionable iObject) {
-        this.subject = (Player) subject;
+        this.subject = subject;
         this.dObject = dObject;
         this.iObject = iObject;
         testRoom = new Room("");
@@ -46,18 +48,22 @@ public class Go implements Task{
     @return false otherwise
      */
     public boolean performAction() {
-        //Test that the input values are appropriate.
-        if ( ! subject.getClass().getName().equals(testPlayer.getClass().getName())) {
-            return false;
-        }
-        Player subjectPlayer = (Player) subject;
-        if( ! dObject.getClass().getName().equals(testRoom.getClass().getName())) {
-            return false;
-        }
-        Room dObjectRoom = (Room) dObject;
+
+        // create test boolean
+        boolean test;
+
+        //Test that the subject is a Player object
+        test = ( ! subject.getClass().getName().equals(testPlayer.getClass().getName()));
+        assert test == true : "(Task) Go.subject is not a Player";
+
+        //test that the dObject is a Room object
+        test = ( ! dObject.getClass().getName().equals(testRoom.getClass().getName()));
+        assert test == true : "(Task) Go.dObject is not a Room";
+
         //perform action
-        subjectPlayer.changeRoom(dObjectRoom);
-        subjectPlayer.inform(dObjectRoom.examine());
+        ((Player) subject).changeRoom((Room) dObject);
+        ((Player) subject).inform("you have entered " + dObject.examine());
+
         return true;
     }
 }

@@ -2,6 +2,8 @@ package zuul_model.tasks;
 
 import zuul_model.Container;
 import zuul_model.Item;
+import zuul_model.Player;
+import zuul_model.Room;
 
 /**
  * Created by Sam on 01/12/2014.
@@ -14,6 +16,7 @@ public class Give implements Task{
     private zuul_model.Actionable iObject;
     private zuul_model.Item testItem;
     private zuul_model.Container testContainer;
+    private final String testPlayer;
 
     /*
     go task: 'subject' is taken from 'indirect object' and given to 'direct object'
@@ -31,6 +34,7 @@ public class Give implements Task{
         this.iObject = iObject;
         testItem = new Item("", "", 0, null);
         testContainer = new Container();
+        testPlayer = (new Player("", new Room(""))).getClass().getName();
     }
 
     @Override
@@ -40,6 +44,15 @@ public class Give implements Task{
      */
     public String getName()
     {
+        boolean test;
+
+        test = subject.getClass().getName().equals(testItem.getClass().getName());
+        assert test == true : "(Task) Give.subject is not an Item";
+        if(test) {
+            if(((Item)subject).getOwner() == iObject) {
+                return DROP;
+            }
+        }
         return TAKE;
     }
 
@@ -49,34 +62,43 @@ public class Give implements Task{
     @return false otherwise
      */
     public boolean performAction() {
-        //Test that the subject is an Item
-        if (! subject.getClass().getName().equals(testItem.getClass().getName())) {
-            return false;
-        }
 
-        //Test that the direct and indirect objects are Containers
+        //create test boolean
+        boolean test;
+
+        //Test that the subject is an Item
+        test = ! subject.getClass().getName().equals(testItem.getClass().getName());
+        assert test == true : "(Task) Give.subject is not an Item";
+
+        //Test that the direct object are Containers
         String containerID = testContainer.getClass().getName();
-        if (! dObject.getClass().getName().equals(containerID)) {
-            return false;
-        }
-        if (! iObject.getClass().getName().equals(containerID)) {
-            return false;
-        }
+        test = ! dObject.getClass().getName().equals(containerID);
+        assert test == true : "(Task) Give.dObject is not a Container";
+
+        //Test that the indirect object are Containers
+        test = ! iObject.getClass().getName().equals(containerID);
+        assert test == true : "(Task) Give.iObject is not a Container";
 
         // test that the iObject contains the Item
-        if(!((Container) iObject).has((Item) subject)) {
-            return false;
-        }
+        test = !((Container) iObject).has((Item) subject);
+        assert test == true : "(Task) Give.iObject does not possess the (Item) subject";
 
-        // that that the dObject does not contain the Item
-        if(((Container) dObject).has((Item) subject)) {
-            return false;
-        }
-
+        //test that that the dObject does not contain the Item
+        test = ((Container) dObject).has((Item) subject);
+        assert test == true : "both (Task) Give.dObject and (Task) Give.iObject possess the (Item) subject";
 
         // transfer item to dObject from iObject
         ((Container) dObject).give((Item) subject);
         ((Container) iObject).take((Item) subject);
+
+        // inform Player (if dObject or iObject is a Player) that they have picked up/dropped an item
+        if(dObject.getClass().getName().equals(testPlayer)) {
+            ((Player) dObject).inform("you have picked up " + subject.examine());
+        } else if (iObject.getClass().getName().equals(testPlayer)) {
+            ((Player) iObject).inform("you have dropped " + subject.examine());
+        }
+
+        // return true only if all tasks have been completed
         return true;
     }
 

@@ -60,7 +60,7 @@ public class Item implements Actionable {
 
     @Override
     public Task[] getTasks(Player player) {
-        ArrayList<Task> tempTask = new ArrayList<Task>();
+        ArrayList<Task> tempTask = new ArrayList<>();
 
         // create Examine Task
         tempTask.add(new Examine(player, this, null));
@@ -68,19 +68,11 @@ public class Item implements Actionable {
         // create Give task (if applicable)
         if(player == owner) {
             tempTask.add(new Give(this, player.getRoom(), player));
-            taskNumber++;
         } else if (player.getRoom() == owner) {
             tempTask.add(new Give(this, player, player.getRoom()));
-            taskNumber++;
         }
 
-
-
-        Task[] tasks = tempTask.toArray(new Task[]);
-
-
-
-        return tasks;
+        return tempTask.toArray(new Task[1]);
     }
 
 
